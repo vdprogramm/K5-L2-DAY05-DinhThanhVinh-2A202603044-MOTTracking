@@ -15,7 +15,7 @@
 - Giờ kết thúc:12AM
 
 
-1. Xem trước đoạn video (CP0)
+## 1. Xem trước đoạn video (CP0)
 
 Ghi trước khi vẽ, mỗi người một dòng.
 
@@ -27,7 +27,7 @@ P4	60	149	Bắt đầu vào khung hình ở frame 60, đổi hướng và tốc 
 P5	0	149	Đổi hướng, tốc độ và kích thước box liên tục từ frame 60 đến 149	Bị che khuất một phần ở 64 frame	Đi qua khu vực đông người, bị che khuất và đổi hướng nhiều nhất
 
 
-2. Keyframe và thời gian (CP1, CP4)
+## 2. Keyframe và thời gian (CP1, CP4)
 
 Số keyframe lấy từ kết quả src/check_submission.py.
 
@@ -43,7 +43,7 @@ Keyframe / 100 frame của cả bài = tổng keyframe ÷ tổng số frame có 
 Bạn đặt keyframe nhiều nhất ở người nào? Vì sao (người đó rẽ, dừng, lại gần camera hay bị che)?
 Tôi đặt keyframe nhiều nhất ở người P5 (69 keyframe, trung bình 46.0 keyframe / 100 frame). Nguyên nhân là vì từ frame 60 trở đi, người này di chuyển qua khu vực đông đúc, bị che khuất một phần tới 64 frame, đồng thời liên tục đổi hướng đi và thay đổi tốc độ khiến đường nội suy tuyến tính của CVAT dễ bị lệch (drift) khỏi cơ thể nếu không chèn keyframe bám sát.
 
-3. Đoạn bị che (CP2)
+## 3. Đoạn bị che (CP2)
 
 Người bị che: P3 (Track 3 trong MOT / Track 2 trong CVAT)
 
@@ -63,7 +63,7 @@ Thấy rõ trở lại (tắt occluded)	143
 (Lưu ý: Bạn nhớ chụp 3 tấm ảnh tương ứng trên CVAT, lưu vào report/individual/images/ và giữ nguyên dòng ghi nguồn bên dưới nhé)
 Nguồn ảnh: MOT17, MOTChallenge (Milan et al., 2016).
 
-4. Tự review ID (CP3)
+## 4. Tự review ID (CP3)
 
 Lượt 1 theo người (đi ngược từ frame 149 về 0 trên CVAT), lượt 2 theo cảnh (nhảy 10 frame). Ít nhất 3 dòng; không có lỗi thì ghi một dòng "đã kiểm hai lượt, không lỗi".
 Loại lỗi dùng đúng một trong 7 mã: id_switch, fragmentation, lost, merge, false_track, drift, flag.
@@ -81,7 +81,7 @@ id_switch	fragmentation	lost	merge	false_track	drift	flag
 Lỗi nào chỉ lượt 2 (theo cảnh) mới thấy, lượt 1 (theo người) không thấy? Vì sao?
 Các lỗi tương tác giữa nhiều người như id_switch (tráo ID khi hai người đi ngang qua nhau) hoặc merge (hai box chồng lấn, ôm nhầm sang người bên cạnh) chỉ dễ phát hiện ở lượt 2 (xem toàn cảnh). Vì ở lượt 1 ta lọc hiển thị từng người đơn lẻ nên không thấy được vị trí tương quan giữa box của người này với các người đi xung quanh trong cùng một khung hình.
 
-5. File xuất và kết quả tự kiểm (CP4)
+## 5. File xuất và kết quả tự kiểm (CP4)
 
 (Nhớ đổi tên 2 file trong src/exports/ thành DinhThanhVinh_mot.zip và DinhThanhVinh_cvat_video.zip để khớp với bảng này nhé)
 
@@ -130,7 +130,7 @@ Số frame in theo CVAT (bắt đầu từ 0). Trong gt.txt, frame_id = frame CV
   Đạt. Dán phần tóm tắt này vào báo cáo mục 5.
 Use code with caution.
 
-6. Ba câu kết
+## 6. Ba câu kết
 
 1. Nếu được gán lại, bạn sẽ đặt keyframe khác ở đâu? Vì sao?Nếu được gán lại, tôi sẽ giảm bớt các keyframe đặt định kỳ mỗi 10 frame ở những đoạn người đi bộ di chuyển thẳng và đều (ví dụ đoạn 0–60 của P1 và P5), thay vào đó chỉ tập trung đặt keyframe tại đúng các điểm đổi hướng, đổi tốc độ và ngay trước/sau khi bị che. Điều này giúp đường nội suy mượt mà hơn, tránh hiện tượng box bị giật cục giữa các keyframe gần nhau và tiết kiệm thời gian gán nhãn.
 2. Có chỗ nào bạn không chắc "cùng ID hay ID mới"? Bạn đã quyết định và ghi chú thế nào?Ở đoạn đối tượng P3 biến mất hoàn toàn từ frame 111 đến 136 (26 frame), ban đầu tôi phân vân vì phía sau vật cản có nhiều người đi qua lại. Tuy nhiên, sau khi đếm số frame vắng (26 frame < 60 frame theo quy tắc 2 giây) và đối chiếu kỹ màu áo, dáng bước chân cũng như vector hướng di chuyển từ frame 110 sang frame 137, tôi quyết định giữ nguyên cùng một Track ID và bật/tắt cờ outside đúng ranh giới che khuất.
@@ -140,7 +140,7 @@ Bonus (nếu làm)
 
 (Nếu bạn không làm phần Bonus thì có thể xóa phần này hoặc để trống như mẫu gốc).
 
-7. Tài liệu tham khảo và công cụ AI đã dùng
+## 7. Tài liệu tham khảo và công cụ AI đã dùng
 
 • Tài liệu tham khảo:
 	• Tài liệu hướng dẫn thực hành Lab Ngày 5 (docs/GUIDELINE.md, docs/CVAT_CHEATSHEET.md, docs/MOT_FORMAT.md, CHECKPOINTS.md).
